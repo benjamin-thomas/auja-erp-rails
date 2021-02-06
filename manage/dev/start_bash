@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker-compose run --rm --user="$(id -u):$(id -u)" web /bin/bash

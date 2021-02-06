@@ -25,6 +25,10 @@ COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
+RUN useradd --no-create-home --uid 1000 app
+RUN chown -R app:app /app
+USER app
+ENV HOME /app
 EXPOSE 3000
 
 # Start the main process.
