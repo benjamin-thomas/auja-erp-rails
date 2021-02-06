@@ -55,6 +55,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'rails-i18n' # gives more default locales
+
 gem 'trestle', '~> 0.9.4'
 gem 'trestle-auth', '~> 0.4.1'
-gem 'rails-i18n' # gives more default locales
+gem 'trestle-search', '~> 0.4.3'

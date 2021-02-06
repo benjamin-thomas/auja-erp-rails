@@ -3,6 +3,10 @@ Trestle.resource(:families) do
     item :families, icon: "fa fa-star"
   end
 
+  search do |query|
+    query ? collection.search(query) : collection
+  end
+
   # Customize the table columns shown on the index view.
   #
   # table do
