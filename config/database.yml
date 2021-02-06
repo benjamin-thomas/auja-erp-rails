@@ -4,7 +4,7 @@ default: &default
   encoding: unicode
   host: db
   username: postgres
-  password: <%= ENV.fetch('POSTGRES_PASSWORD') %>
+  password: <%= ENV.fetch('POSTGRES_PASSWORD') { SecureRandom.hex(20) } %>
   pool: 5
 
 development:
