@@ -17,7 +17,7 @@ services:
       - db
 
   db:
-    image: postgres
+    image: postgres:11.9
     restart: always
     env_file:
       - ~/.env/auja-rails/db.env
