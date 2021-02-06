@@ -62,6 +62,7 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    bcrypt (3.1.16)
     bindex (0.8.1)
     bootsnap (1.7.1)
       msgpack (~> 1.0)
@@ -189,6 +190,9 @@ GEM
       kaminari (>= 1.1.0)
       railties (>= 4.2.0)
       sprockets-rails (>= 2.0.0)
+    trestle-auth (0.4.1)
+      bcrypt (~> 3.1.7)
+      trestle (~> 0.9.0, >= 0.9.3)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -232,6 +236,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   trestle (~> 0.9.4)
+  trestle-auth (~> 0.4.1)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
