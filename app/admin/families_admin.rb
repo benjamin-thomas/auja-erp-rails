@@ -1,6 +1,6 @@
 Trestle.resource(:families) do
   menu do
-    item :families, icon: "fa fa-star"
+    item :families, icon: "fa fa-group"
   end
 
   search do |query|

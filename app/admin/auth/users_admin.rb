@@ -1,7 +1,7 @@
 Trestle.resource(:users, model: User, scope: Auth) do
   menu do
     group :configuration, priority: :last do
-      item :users, icon: "fas fa-users"
+      item :users, icon: "fas fa-users" if current_user.email == 'user@example.com'
     end
   end
 
