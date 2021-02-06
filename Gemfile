@@ -57,3 +57,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'trestle', '~> 0.9.4'
 gem 'trestle-auth', '~> 0.4.1'
+gem 'rails-i18n' # gives more default locales

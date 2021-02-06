@@ -31,7 +31,9 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.families (
     id bigint NOT NULL,
-    name character varying(255)
+    name character varying(255),
+    created_at timestamp without time zone DEFAULT timezone('UTC'::text, CURRENT_TIMESTAMP) NOT NULL,
+    updated_at timestamp without time zone DEFAULT timezone('UTC'::text, CURRENT_TIMESTAMP) NOT NULL
 );
 
 

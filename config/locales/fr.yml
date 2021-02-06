@@ -1,4 +1,7 @@
 fr:
+  attributes:
+    created_at: Créé le
+    updated_at: Modifié le
   activerecord:
       models:
         family:
