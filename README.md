@@ -1,24 +1,12 @@
-# README
+## Launch dev env
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```bash
+docker-compose up # term1
+./manage/dev/start_bash # term2
+```
 
-Things you may want to cover:
+## Create user
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+User.create(email: "admin@example.com", password: "password", first_name: "Admin", last_name: "User")
+```

@@ -62,7 +62,11 @@ Rails.application.configure do
   config.assets.quiet = true
 
   # Raises error for missing translations.
-  # config.i18n.raise_on_missing_translations = true
+  config.i18n.raise_on_missing_translations = true
+  # Below does not seem to raise with Trestle
+  config.i18n.fallbacks = false
+  config.i18n.exception_handler = Proc.new { |exception| raise exception.to_exception }
+
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
