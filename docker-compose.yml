@@ -1,0 +1,20 @@
+# https://docs.docker.com/compose/rails/
+
+version: '3'
+services:
+  db:
+    image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/app
+    ports:
+      - "127.1.10.1:3000:3000" # rails-erp.auja.test
+    depends_on:
+      - db
+
+volumes:
+  db-data:
