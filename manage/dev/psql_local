@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -a
+source ~/.env/auja-rails/db.env
+set +a
+
+PGPASSWORD=$POSTGRES_PASSWORD exec psql \
+  -h "pg-rails-erp.auja.test" \
+  -U postgres \
+  -d auja_erp_development
