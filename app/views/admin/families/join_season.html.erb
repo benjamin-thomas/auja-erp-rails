@@ -1,0 +1,11 @@
+<% locals = {
+  instance: @family.memberships.build,
+  #url: join_season_families_admin_url(@family)
+  url: join_season_families_admin_url(@family)
+} %>
+
+<%= render layout: 'admin/shared/edit', locals: locals do |f| %>
+  <%= f.select :season_id, @seasons.map { |s| [s.to_s, s.id] },
+    label: t('activerecord.attributes.membership.season') %>
+  <%= f.submit %>
+<% end %>

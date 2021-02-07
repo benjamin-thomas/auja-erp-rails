@@ -1,5 +1,6 @@
 class Family < ApplicationRecord
   has_many :members
+  has_many :memberships
 
   validates :name, presence: true
 

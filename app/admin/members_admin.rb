@@ -1,6 +1,8 @@
 Trestle.resource(:members) do
   menu do
-    item :members, icon: "fa fa-user"
+    group :contact, priority: 1 do
+      item :members, icon: "fa fa-user"
+    end
   end
 
   table do

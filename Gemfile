@@ -60,3 +60,5 @@ gem 'rails-i18n' # gives more default locales
 gem 'trestle', '~> 0.9.4'
 gem 'trestle-auth', '~> 0.4.1'
 gem 'trestle-search', '~> 0.4.3'
+
+gem 'nilify_blanks', '~> 1.4'

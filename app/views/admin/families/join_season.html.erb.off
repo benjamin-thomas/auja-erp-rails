@@ -1,0 +1,10 @@
+hello <%= @family.name %>
+
+<hr>
+
+<%= form_with(model: @family, url: join_season_families_admin_url) do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+<% end %>

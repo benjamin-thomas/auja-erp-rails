@@ -29,8 +29,43 @@
   </p>
 
   <hr>
-  <h4>Activités de cette famille</h4>
 
-  <p>TODO</p>
+  <% if instance.memberships.empty? %>
+
+    <p>
+    Cette famille n'est inscrite à aucune adhésion !
+    </p>
+
+  <% else %>
+
+    <hr>
+    <h4>Adhésions de cette famille</h4>
+    <ol>
+      <% instance.memberships.each do |membership| %>
+        <li>
+          <%= link_to(membership.season, memberships_admin_path(membership)) %>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
+
+
+  <% if Rails.env.development? %>
+    <p>
+    <%= link_to(
+      'Adhérer à une saison (alt)',
+      join_season_families_admin_path(instance.id),
+      class: 'btn btn-deault'
+    ) %>
+    </p>
+  <% end %>
+
+  <p>
+  <%= link_to(
+    'Adhérer à une saison',
+    new_memberships_admin_path(family_id: instance.id),
+    class: 'btn btn-primary'
+  ) %>
+  </p>
 
 <% end %>

@@ -16,10 +16,25 @@ fr:
         member:
           one: membre
           other: membres
+        activity:
+          one: activité
+          other: activités
+        season:
+          one: saison
+          other: saisons
+        membership:
+          one: adhésion
+          other: adhésions
 
       attributes:
         member:
           family: Famille
+        season:
+          starts_on: Débute le
+          activity: Activité
+        membership:
+          family: Famille
+          season: Saison
 
 
 # https://github.com/TrestleAdmin/trestle/blob/master/config/locales/en.yml
@@ -31,8 +46,14 @@ fr:
   admin:
     titles:
       show: "%{model_name} (vue)"
+      join_season: "%{model_name} (adhérer à une saison)"
     navigation:
+      #groups:
+      #  people: Peuple
       items:
         users: Utilisateurs
         families: Familles
         members: Membres
+        activities: Activités
+        memberships: Adhésions
+        seasons: Saisons

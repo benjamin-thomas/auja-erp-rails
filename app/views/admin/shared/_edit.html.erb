@@ -3,7 +3,7 @@
     # https://github.com/TrestleAdmin/trestle/issues/71
 %>
 <% title = t(
-  'admin.titles.show',
+  "admin.titles.#{action_name}",
   model_name: admin.model_name.titleize,
   pluralized_model_name: admin.model_name.plural.titleize,
 )
@@ -13,9 +13,14 @@
 <% breadcrumb title %>
 
 <% content_for(:primary_toolbar) do %>
-  <%= admin_link_to t("admin.buttons.edit", default: "Edit %{model_name}", model_name: admin.model_name), instance, action: :edit, class: "btn btn-success btn-lg" if admin.actions.include?(:edit) %>
+  <%= link_to t("admin.buttons.save"), url, method: :post, class: "btn btn-success btn-lg" if admin.actions.include?(:edit) %>
 <% end %>
 
 <%= render layout: "layout" do %>
-  <%= yield %>
+  <%= instance.errors.full_messages %>
+  <%= form_with model: instance, url: url, method: :post do |f| %>
+    <%#= form_with(model: instance, url: url) do |f| %>
+    <%= yield(f) %>
+  <% end %>
+  <%# end %>
 <% end %>
