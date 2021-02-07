@@ -5,6 +5,11 @@ Trestle.resource(:members) do
     end
   end
 
+  search do |query|
+    query ? collection.search(query) : collection
+  end
+
+
   table do
     column :id
     column :first_name

@@ -1,0 +1,19 @@
+<%= render 'admin/shared/show' do %>
+  <h2><%= instance %></h2>
+
+  <% if instance.memberships.empty? %>
+    <p>Aucun adhérent n'est inscrit à cette saison</p>
+  <% else %>
+
+    <hr>
+    <h4>Familles adhérentes à cette saison</h4>
+
+    <ol>
+      <% instance.memberships.includes(:family).each do |membership| %>
+        <li>
+          <%= membership.family.name %>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
+<% end %>

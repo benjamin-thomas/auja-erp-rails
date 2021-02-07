@@ -6,7 +6,7 @@ Trestle.resource(:seasons) do
   end
 
   table do
-    column :activity
+    column :activity, link: false
     column :starts_on, align: :center do |season|
       l(season.starts_on, format: '%b %Y')
     end
