@@ -1,0 +1,19 @@
+<%= render 'admin/shared/show' do %>
+  <h2><%= instance %></h2>
+
+  <p>
+  Ce membre appartient à la famille
+  <%= link_to(instance.family, families_admin_path(instance.family)) %>
+  </p>
+
+  <hr>
+
+  <% if instance.email.nil? %>
+    <p>Ce membre n'a pas d'adresse email.</p>
+  <% else %>
+    <h4>Email</h4>
+  <p>
+    <%= mail_to(instance.email) %>
+  </p>
+  <% end %>
+<% end %>

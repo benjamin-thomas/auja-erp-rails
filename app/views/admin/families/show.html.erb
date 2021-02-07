@@ -20,6 +20,14 @@
     </ol>
   <% end %>
 
+  <p>
+  <%= link_to(
+    'Ajouter un membre',
+    new_members_admin_path(family_id: instance.id),
+    class: 'btn btn-primary'
+  ) %>
+  </p>
+
   <hr>
   <h4>Activités de cette famille</h4>
 
