@@ -35,3 +35,4 @@ v0.5 of `trestle-auth` will handle authorization. Meanwhile, check those URLs fo
 - https://github.com/TrestleAdmin/trestle/wiki/Has-Many-Relationship-Tab
 - https://github.com/TrestleAdmin/trestle/wiki/How-to:-Populate-a-select-dynamically
 - [nested resource](https://github.com/TrestleAdmin/trestle/issues/19)
+- https://github.com/TrestleAdmin/trestle/wiki/Sorting-Options

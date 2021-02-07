@@ -2,6 +2,8 @@ fr:
   attributes:
     created_at: Créé le
     updated_at: Modifié le
+    first_name: Prénom
+    last_name: Nom de famille
   activerecord:
       models:
         family:
@@ -10,12 +12,14 @@ fr:
         user:
           one: utilisateur
           other: utilisateurs
+        member:
+          one: membre
+          other: membres
 
       attributes:
-        user:
-          login: "Handle"
-          first_name: Prénom
-          last_name: Nom de famille
+        member:
+          family: Famille
+
 
 # https://github.com/TrestleAdmin/trestle/blob/master/config/locales/en.yml
 # https://github.com/TrestleAdmin/trestle/blob/master/config/locales/fr.yml
@@ -24,7 +28,10 @@ fr:
       footer: "ERP"
 
   admin:
+    titles:
+      show: "%{model_name} (vue)"
     navigation:
       items:
         users: Utilisateurs
         families: Familles
+        members: Membres

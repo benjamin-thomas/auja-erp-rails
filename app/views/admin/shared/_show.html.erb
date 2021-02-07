@@ -1,0 +1,17 @@
+<% title = t(
+  'admin.titles.show',
+  model_name: admin.model_name.titleize,
+  pluralized_model_name: admin.model_name.plural.titleize,
+)
+%>
+
+<% content_for(:title, title) %>
+<% breadcrumb title %>
+
+<% content_for(:primary_toolbar) do %>
+  <%= admin_link_to t("admin.buttons.edit", default: "Edit %{model_name}", model_name: admin.model_name), instance, action: :edit, class: "btn btn-success btn-lg" if admin.actions.include?(:edit) %>
+<% end %>
+
+<%= render layout: "layout" do %>
+  <%= yield %>
+<% end %>

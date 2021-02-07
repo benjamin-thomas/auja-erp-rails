@@ -52,6 +52,35 @@ ALTER TABLE public.families ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
+-- Name: members; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.members (
+    id bigint NOT NULL,
+    family_id bigint NOT NULL,
+    first_name character varying(100),
+    last_name character varying(100),
+    email character varying(100),
+    created_at timestamp without time zone DEFAULT timezone('UTC'::text, CURRENT_TIMESTAMP) NOT NULL,
+    updated_at timestamp without time zone DEFAULT timezone('UTC'::text, CURRENT_TIMESTAMP) NOT NULL
+);
+
+
+--
+-- Name: members_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.members ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.members_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -128,6 +157,22 @@ ALTER TABLE ONLY public.families
 
 
 --
+-- Name: members members_email_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.members
+    ADD CONSTRAINT members_email_key UNIQUE (email);
+
+
+--
+-- Name: members members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.members
+    ADD CONSTRAINT members_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -144,6 +189,35 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: members_full_name_uidx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX members_full_name_uidx ON public.members USING btree (first_name, last_name);
+
+
+--
+-- Name: users_email_uidx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX users_email_uidx ON public.users USING btree (email);
+
+
+--
+-- Name: users_full_name_uidx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX users_full_name_uidx ON public.users USING btree (first_name, last_name);
+
+
+--
+-- Name: members members_family_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.members
+    ADD CONSTRAINT members_family_id_fkey FOREIGN KEY (family_id) REFERENCES public.families(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -151,6 +225,7 @@ SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20210206141912'),
-('20210206162325');
+('20210206162325'),
+('20210207015826');
 
 

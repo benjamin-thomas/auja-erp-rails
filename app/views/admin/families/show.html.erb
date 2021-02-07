@@ -1,0 +1,28 @@
+<%= render 'admin/shared/show' do %>
+  <h2>Famille <%= instance.name %></h2>
+
+  <% if instance.members.empty? %>
+
+    <p>
+    Cette famille n'a aucun membre !
+    </p>
+
+  <% else %>
+
+    <hr>
+    <h4>Membres de cette famille</h4>
+    <ol>
+      <% instance.members.each do |member| %>
+        <li>
+          <%= link_to(member, members_admin_path(member)) %>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
+
+  <hr>
+  <h4>Activités de cette famille</h4>
+
+  <p>TODO</p>
+
+<% end %>
