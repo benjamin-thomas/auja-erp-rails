@@ -1,7 +1,7 @@
 Trestle.resource(:seasons) do
   menu do
-    group :projects, priority: 2 do
-      item :seasons, icon: "fab fa-pagelines", priority: 1
+    group :configuration do
+      item :seasons, icon: "fab fa-pagelines", priority: 3
     end
   end
 

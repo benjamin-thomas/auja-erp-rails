@@ -4,7 +4,7 @@
   <% if instance.members.empty? %>
 
     <p>
-    Cette famille n'a aucun membre !
+      Cette famille n'a aucun membre !
     </p>
 
   <% else %>
@@ -21,11 +21,11 @@
   <% end %>
 
   <p>
-  <%= link_to(
-    'Ajouter un membre',
-    new_members_admin_path(family_id: instance.id),
-    class: 'btn btn-primary'
-  ) %>
+    <%= link_to(
+          'Ajouter un membre',
+          new_members_admin_path(family_id: instance.id),
+          class: 'btn btn-primary'
+        ) %>
   </p>
 
   <hr>
@@ -33,7 +33,7 @@
   <% if instance.memberships.empty? %>
 
     <p>
-    Cette famille n'est inscrite à aucune saison !
+      Cette famille n'est inscrite à aucune saison !
     </p>
 
   <% else %>
@@ -44,7 +44,32 @@
       <% instance.memberships.each do |membership| %>
         <li>
           <%= link_to(membership.season, memberships_admin_path(membership)) %>
+
+          <span style="float:right">
+          <%= link_to(
+                "Enregistrer un paiement",
+                new_payments_admin_path(membership_id: membership.id),
+                class: 'btn btn-default btn-sm'
+              ) %>
+          </span>
+
+          <ul>
+            <% membership.payments.order(assigned_on: :desc).each do |payment| %>
+              <li>
+                <span style="font-weight: bold;font-family: monospace">
+                <%= sanitize (number_to_currency payment.amount).rjust(8, "^").gsub('^', '&nbsp;') %>
+                </span>
+                en <%=
+                link_to(
+                  l(payment.assigned_on, format: '%B %Y'),
+                  payments_admin_path(payment),
+                )
+              %>
+              </li>
+            <% end %>
+          </ul>
         </li>
+
       <% end %>
     </ol>
   <% end %>
@@ -52,20 +77,20 @@
 
   <% if Rails.env.development? %>
     <p>
-    <%= link_to(
-      'Adhérer à une saison (alt)',
-      join_season_families_admin_path(instance.id),
-      class: 'btn btn-deault'
-    ) %>
+      <%= link_to(
+            'Adhérer à une saison (alt)',
+            join_season_families_admin_path(instance.id),
+            class: 'btn btn-deault'
+          ) %>
     </p>
   <% end %>
 
   <p>
-  <%= link_to(
-    'Adhérer à une saison',
-    new_memberships_admin_path(family_id: instance.id),
-    class: 'btn btn-primary'
-  ) %>
+    <%= link_to(
+          'Adhérer à une saison',
+          new_memberships_admin_path(family_id: instance.id),
+          class: 'btn btn-primary'
+        ) %>
   </p>
 
 <% end %>

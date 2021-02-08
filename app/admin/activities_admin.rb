@@ -1,7 +1,8 @@
 Trestle.resource(:activities) do
   menu do
     group :configuration, priority: 2 do
-      item :activities, icon: "fas fa-project-diagram" if current_user.id == 1
+      # fas fa-project-diagram
+      item :activities, icon: "fas fa-lock", priority: 2 if current_user.id == 1
     end
   end
 

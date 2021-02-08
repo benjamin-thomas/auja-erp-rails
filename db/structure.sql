@@ -134,6 +134,62 @@ ALTER TABLE public.memberships ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY 
 
 
 --
+-- Name: payment_types; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.payment_types (
+    id bigint NOT NULL,
+    name character varying(100),
+    created_at timestamp without time zone DEFAULT timezone('UTC'::text, CURRENT_TIMESTAMP) NOT NULL,
+    updated_at timestamp without time zone DEFAULT timezone('UTC'::text, CURRENT_TIMESTAMP) NOT NULL
+);
+
+
+--
+-- Name: payment_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.payment_types ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.payment_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: payments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.payments (
+    id bigint NOT NULL,
+    membership_id bigint NOT NULL,
+    assigned_on timestamp without time zone NOT NULL,
+    payment_type_id bigint NOT NULL,
+    amount numeric(19,2) NOT NULL,
+    notes text,
+    created_at timestamp without time zone DEFAULT timezone('UTC'::text, CURRENT_TIMESTAMP) NOT NULL,
+    updated_at timestamp without time zone DEFAULT timezone('UTC'::text, CURRENT_TIMESTAMP) NOT NULL
+);
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.payments ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.payments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -269,6 +325,22 @@ ALTER TABLE ONLY public.memberships
 
 
 --
+-- Name: payment_types payment_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_types
+    ADD CONSTRAINT payment_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: payments payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments
+    ADD CONSTRAINT payments_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -304,6 +376,13 @@ CREATE UNIQUE INDEX members_full_name_uidx ON public.members USING btree (first_
 --
 
 CREATE UNIQUE INDEX memberships_uniq_registration_uidx ON public.memberships USING btree (family_id, season_id);
+
+
+--
+-- Name: payments_membership_id_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX payments_membership_id_idx ON public.payments USING btree (membership_id);
 
 
 --
@@ -345,6 +424,22 @@ ALTER TABLE ONLY public.memberships
 
 
 --
+-- Name: payments payments_membership_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments
+    ADD CONSTRAINT payments_membership_id_fkey FOREIGN KEY (membership_id) REFERENCES public.memberships(id);
+
+
+--
+-- Name: payments payments_payment_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments
+    ADD CONSTRAINT payments_payment_type_id_fkey FOREIGN KEY (payment_type_id) REFERENCES public.payment_types(id);
+
+
+--
 -- Name: seasons seasons_activity_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -363,6 +458,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210206162325'),
 ('20210207015826'),
 ('20210207051519'),
-('20210207053715');
+('20210207053715'),
+('20210208185958');
 
 

@@ -1,7 +1,7 @@
 Trestle.resource(:memberships) do
   menu do
     group :projects, priority: 2 do
-      item :memberships, icon: "fas fa-book", priority: 2
+      item :memberships, icon: "fas fa-book", priority: 1
     end
   end
 

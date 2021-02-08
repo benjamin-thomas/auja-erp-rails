@@ -1,7 +1,7 @@
 Trestle.resource(:users, model: User, scope: Auth) do
   menu do
     group :configuration, priority: :last do
-      item :users, icon: "fas fa-lock" if current_user.id == 1
+      item :users, icon: "fas fa-lock", priority: 1 if current_user.id == 1
     end
   end
 
