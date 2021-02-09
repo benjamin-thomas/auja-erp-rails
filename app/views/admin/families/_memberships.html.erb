@@ -1,0 +1,66 @@
+<% # hacky/messy, this will do for now %>
+
+<% unless only_membership %>
+  <ol>
+<% end %>
+
+<% family.memberships.each do |membership| %>
+  <% next if only_membership && membership != only_membership %>
+
+  <!-- ONLY_MEMBERSHIP:START -->
+  <% unless only_membership %>
+    <li>
+      <%= link_to(membership.season, seasons_admin_path(membership.season)) %>
+  <% end %>
+
+  <span style="float:right">
+          <%= link_to(
+                "Enregistrer un paiement",
+                new_payments_admin_path(membership_id: membership.id),
+                class: 'btn btn-default btn-sm'
+              ) %>
+          </span>
+
+  <ul>
+    <% membership.payments.order(assigned_on: :desc).each do |payment| %>
+      <li>
+                <span style="font-weight: bold;font-family: monospace">
+                <%= sanitize (number_to_currency payment.amount).rjust(8, "^").gsub('^', '&nbsp;') %>
+                </span>
+        en <%= link_to(
+                 l(payment.assigned_on, format: '%B %Y'),
+                 payments_admin_path(payment),
+               ) %>
+
+        <ul>
+          <% if payment.cleared_payments.empty? %>
+          <span style="float:right">
+            <%= link_to(
+                  'Pointer vers une transaction bancaire',
+                  new_cleared_payments_admin_path(payment_id: payment.id),
+                class: 'btn btn-default btn-sm'
+                ) %>
+          </span>
+          <% end %>
+
+          <% payment.cleared_payments.each do |cleared_payment| %>
+            <li>
+              <%= link_to(
+                    cleared_payment.display_for_li_item,
+                    cleared_payments_admin_url(cleared_payment)) %>
+            </li>
+          <% end %>
+        </ul>
+
+      </li>
+    <% end %>
+  </ul>
+  <% unless only_membership %>
+    </li>
+  <% end %>
+  <!-- ONLY_MEMBERSHIP:END -->
+<% end %>
+
+<% unless only_membership %>
+  </ol>
+<% end %>

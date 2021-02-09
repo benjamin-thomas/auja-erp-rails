@@ -10,6 +10,7 @@ class Payment < ApplicationRecord
   def display_for_select
     [
       assigned_on.to_date,
+      amount,
       membership.family,
       membership.season
     ].join(' ::: ')

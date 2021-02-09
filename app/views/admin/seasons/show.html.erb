@@ -11,7 +11,11 @@
     <ol>
       <% instance.memberships.includes(:family).each do |membership| %>
         <li>
-          <%= membership.family.name %>
+          <%= link_to(membership.family.name, families_admin_path(membership.family)) %>
+          <%= render partial: 'admin/families/memberships', locals: {
+            family: membership.family,
+            only_membership: membership,
+          } %>
         </li>
       <% end %>
     </ol>

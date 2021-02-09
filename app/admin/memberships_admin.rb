@@ -1,4 +1,8 @@
 Trestle.resource(:memberships) do
+  return_to do |membership|
+    families_admin_path(membership.family_id)
+  end
+
   menu do
     group :projects, priority: 2 do
       item :memberships, icon: "fas fa-book", priority: 1
