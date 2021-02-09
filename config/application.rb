@@ -19,7 +19,9 @@ module App
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.active_record.schema_format = :sql
+    unless ENV['SUPPRESS_SCHEMA_FORMAT'] == '1'
+      config.active_record.schema_format = :sql
+    end
     config.i18n.default_locale = :fr
   end
 end

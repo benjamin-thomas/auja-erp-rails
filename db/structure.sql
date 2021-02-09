@@ -52,6 +52,40 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: cleared_payments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cleared_payments (
+    id bigint NOT NULL,
+    payment_id bigint NOT NULL,
+    transaction_id bigint NOT NULL,
+    created_at timestamp without time zone DEFAULT timezone('UTC'::text, CURRENT_TIMESTAMP) NOT NULL,
+    updated_at timestamp without time zone DEFAULT timezone('UTC'::text, CURRENT_TIMESTAMP) NOT NULL
+);
+
+
+--
+-- Name: COLUMN cleared_payments.transaction_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.cleared_payments.transaction_id IS 'Can reference multiple payments';
+
+
+--
+-- Name: cleared_payments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.cleared_payments ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.cleared_payments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: families; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -313,6 +347,22 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
+-- Name: cleared_payments cleared_payments_payment_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cleared_payments
+    ADD CONSTRAINT cleared_payments_payment_id_key UNIQUE (payment_id);
+
+
+--
+-- Name: cleared_payments cleared_payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cleared_payments
+    ADD CONSTRAINT cleared_payments_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: families families_name_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -436,6 +486,22 @@ CREATE UNIQUE INDEX users_full_name_uidx ON public.users USING btree (first_name
 
 
 --
+-- Name: cleared_payments cleared_payments_payment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cleared_payments
+    ADD CONSTRAINT cleared_payments_payment_id_fkey FOREIGN KEY (payment_id) REFERENCES public.payments(id);
+
+
+--
+-- Name: cleared_payments cleared_payments_transaction_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cleared_payments
+    ADD CONSTRAINT cleared_payments_transaction_id_fkey FOREIGN KEY (transaction_id) REFERENCES public.transactions(id);
+
+
+--
 -- Name: members members_family_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -496,6 +562,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210207051519'),
 ('20210207053715'),
 ('20210208185958'),
-('20210209041211');
+('20210209041211'),
+('20210209051613');
 
 

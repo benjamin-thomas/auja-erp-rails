@@ -59,12 +59,21 @@
                 <span style="font-weight: bold;font-family: monospace">
                 <%= sanitize (number_to_currency payment.amount).rjust(8, "^").gsub('^', '&nbsp;') %>
                 </span>
-                en <%=
-                link_to(
-                  l(payment.assigned_on, format: '%B %Y'),
-                  payments_admin_path(payment),
-                )
-              %>
+                en <%= link_to(
+                         l(payment.assigned_on, format: '%B %Y'),
+                         payments_admin_path(payment),
+                       ) %>
+
+                <ul>
+                  <% payment.cleared_payments.each do |cleared_payment| %>
+                    <li>
+                      <%= link_to(
+                            cleared_payment.display_for_li_item,
+                            cleared_payments_admin_url(cleared_payment)) %>
+                    </li>
+                  <% end %>
+                </ul>
+
               </li>
             <% end %>
           </ul>
