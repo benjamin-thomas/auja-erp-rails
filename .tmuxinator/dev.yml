@@ -7,11 +7,12 @@ windows:
   - rails_c:
       - ./bin/rails c
       - Rails.application.eager_load! # model tab completion, etc.
+      - Hirb.enable
       - Family.limit(10)
   - cmd:
       - ./bin/rails notes
   - psql:
-      - PGUSER=postgres PGPASSWORD=$POSTGRES_PASSWORD PGHOST=db psql
+      - PGUSER=postgres PGPASSWORD=$POSTGRES_PASSWORD PGHOST=db PGDATABASE=auja_erp_development psql
       - SELECT * FROM families LIMIT 10\;
 #  - updates:
 #      - bundle outdated

@@ -25,6 +25,9 @@ fr:
         membership:
           one: adhésion
           other: adhésions
+        transaction:
+          one: ransaction
+          other: transactions
 
       attributes:
         member:
@@ -48,6 +51,7 @@ fr:
       all: Tout
       test: "Test"
       unbalanced: "À équilibrer"
+      balanced: "Équilibré"
 
     titles:
       show: "%{model_name} (vue)"
@@ -62,3 +66,7 @@ fr:
         activities: Activités
         memberships: Adhésions
         seasons: Saisons
+  payment_types:
+    display:
+      1: remise d'un chèque
+      2: remise en espèces

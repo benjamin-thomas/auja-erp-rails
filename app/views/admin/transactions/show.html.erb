@@ -1,1 +1,60 @@
-hello
+<%= render 'admin/shared/show' do %>
+
+
+  <h2><%= instance.descr %></h2>
+
+  <p>Transaction bancaire le :
+    <span style="font-weight: bold">
+  <%= l(instance.cleared_on, format: '%d %B %Y (un %A)') %>
+  </span>
+  </p>
+
+  <p>
+    Montant de la transaction :
+    <span style="font-weight: bold">
+      <%= number_to_currency(instance.amount) %>
+    </span>
+  </p>
+
+  <% if instance.payments.any? %>
+    <% payments_total = instance.payments.sum(:amount) %>
+    <p>
+      Total des paiements liés :
+      <span style="font-weight: bold">
+      <%= number_to_currency(payments_total) %>
+        <% if payments_total == instance.amount %>
+          <span style="line-height:1rem;font-size:1.4rem;font-weight:bold;color:#7dc67d">✓</span>
+        <% else %>
+          <span style="line-height:1rem;font-size:1rem;font-weight:bold;color:#e17572">✗</span>
+        <% end %>
+    </span>
+    </p>
+  <% end %>
+
+  <% if instance.payments.empty? %>
+    <p>
+      Il n'y a aucun paiement en lien avec cette transaction.
+    </p>
+  <% else %>
+    <hr>
+    <h3>Paiements en lien avec cette transaction</h3>
+    <ul>
+      <% instance.payments.each do |payment| %>
+        <li>
+          <%= payment.membership %>
+          <ul>
+            <li>
+              <span style="font-weight: bold;font-family: monospace">
+                <%= sanitize (number_to_currency payment.amount).rjust(8, "^").gsub('^', '&nbsp;') %>
+              </span>
+              <%= t("payment_types.display.#{payment.payment_type_id}", default: payment.payment_type) %> le <%= l(payment
+                                                                                                     .assigned_on, format: '%d %b
+              %y') %>
+            </li>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+<% end %>

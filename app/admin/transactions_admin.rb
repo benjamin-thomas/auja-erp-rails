@@ -6,8 +6,9 @@ Trestle.resource(:transactions) do
   end
 
   scopes do
-    scope :all, default: true, label: t('admin.scopes.all')
-    scope :unbalanced, label: t('admin.scopes.unbalanced')
+    scope :unbalanced, default: true, label: t('admin.scopes.unbalanced')
+    scope :balanced, label: t('admin.scopes.balanced')
+    scope :all, label: t('admin.scopes.all')
   end
 
   form do
