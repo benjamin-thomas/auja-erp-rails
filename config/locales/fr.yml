@@ -26,7 +26,7 @@ fr:
           one: adhésion
           other: adhésions
         transaction:
-          one: ransaction
+          one: transaction
           other: transactions
 
       attributes:
