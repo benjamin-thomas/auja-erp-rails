@@ -44,6 +44,11 @@ fr:
       footer: "ERP"
 
   admin:
+    scopes:
+      all: Tout
+      test: "Test"
+      unbalanced: "À équilibrer"
+
     titles:
       show: "%{model_name} (vue)"
       join_season: "%{model_name} (adhérer à une saison)"

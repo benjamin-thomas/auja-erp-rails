@@ -4,18 +4,6 @@ version: '3'
 
 services:
 
-  web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    volumes:
-      - .:/app
-    ports:
-      - "127.1.10.1:3000:3000" # rails-erp.auja.test
-    env_file:
-      - ~/.env/auja-rails/db.env
-    depends_on:
-      - db
-
   db:
     image: postgres:13.1
     restart: always
@@ -27,6 +15,23 @@ services:
       - db-data:/var/lib/postgresql/data
       - ./tmp/latest.dump:/tmp/latest.dump
 
+  rails_dev:
+    build:
+      context: .
+      args:
+        - RAILS_ENV=development
+    command: tmuxinator start dev
+    volumes:
+      - .:/app
+    ports:
+      - "127.1.10.1:3000:3000" # rails-erp.auja.test
+    env_file:
+      - ~/.env/auja-rails/db.env
+#    environment:
+#      PAGER: "less -RS"
+#      LC_ALL: "en_US.utf8" # for psql
+    depends_on:
+      - db
 
 volumes:
   db-data:

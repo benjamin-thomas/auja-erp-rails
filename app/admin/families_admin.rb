@@ -5,6 +5,17 @@ Trestle.resource(:families) do
     end
   end
 
+  scopes do
+    scope :all, default: true, label: t('admin.scopes.all')
+    scope :test, -> { Family.limit(2) }, label: t('admin.scopes.test')
+  end
+
+  # scopes do
+  #   scope :hello, -> { Family.limit(2) }
+  #   # scope :all#, default: true
+  #   # scope :unbalanced, -> { Transaction.unbalanced }
+  # end
+
   search do |query|
     query ? collection.search(query) : collection
   end

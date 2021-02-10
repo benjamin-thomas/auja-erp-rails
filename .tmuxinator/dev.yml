@@ -1,0 +1,28 @@
+name: auja-rails(dev)
+root: ~/
+
+pre_window: export PS1="\[\033[38;5;245m\](@dev \W)\[\033[00m\] "
+
+windows:
+  - rails_c:
+      - ./bin/rails c
+      - Rails.application.eager_load! # model tab completion, etc.
+      - Family.limit(10)
+  - cmd:
+      - ./bin/rails notes
+  - psql:
+      - PGUSER=postgres PGPASSWORD=$POSTGRES_PASSWORD PGHOST=db psql
+      - SELECT * FROM families LIMIT 10\;
+#  - updates:
+#      - bundle outdated
+#      - bundle exec bundle audit
+#      - bundle exec i18n-tasks unused
+#      - bundle exec i18n-tasks missing
+  - rails_s:
+      - rm ./tmp/pids/server.pid # crashes next server if exists from abort
+      - BULLET=0 DEBUG_ASSETS=0 ./bin/rails s -b 0.0.0.0
+#  - jobs:
+#      - ./bin/rake jobs:workoff # do not use jobs:work, memory leak + CPU pegging with classes reload, etc.
+  - logs: tail -f log/development.log
+#  - migrate: DISABLE_SPRING=1 MB_ADMIN=1 SKIP_RLS_CHECK=1 ./bin/rake db:migrate:status
+#  - views_funcs: ADMIN_DATABASE_URL=$ADMIN_DATABASE_URL_DEVELOPMENT ./manage/create_all_views_and_funcs --help

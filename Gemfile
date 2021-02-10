@@ -31,6 +31,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry'
 end
 
 group :development do
@@ -57,7 +58,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'rails-i18n' # gives more default locales
 
+# Debug gems this way
+# mkdir -p lib/vendor/gems/trestle-0.9.4
+# cd lib/vendor/gems/trestle-0.9.4
+# degit github.com/TrestleAdmin/trestle#v0.9.4
+# add path option
+# gem 'trestle', '~> 0.9.4', path: 'lib/vendor/gems/trestle-0.9.4'
 gem 'trestle', '~> 0.9.4'
+
 gem 'trestle-auth', '~> 0.4.1'
 gem 'trestle-search', '~> 0.4.3'
 

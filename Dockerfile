@@ -18,10 +18,20 @@ RUN useradd --no-create-home --uid 1000 app
 RUN mkdir /app
 WORKDIR /app
 
+#COPY ./lib/vendor/gems/ /app/lib/vendor/gems/
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 
-RUN bundle install
+ARG RAILS_ENV
+RUN if [ "$RAILS_ENV" = "development" -o "$RAILS_ENV" = "test" ] \
+  ;then \
+    echo "==> Bundling for dev/test and installing dev tools" \
+    && bundle install \
+    && apt-get install -y tmuxinator vim \
+  ;else echo "==> Bundling for prod" \
+    && bundle config set --local without 'development test' \
+    && bundle install \
+  ;fi
 
 FROM base
 

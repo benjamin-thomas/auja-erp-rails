@@ -67,7 +67,6 @@ Rails.application.configure do
   config.i18n.fallbacks = false
   config.i18n.exception_handler = Proc.new { |exception| raise exception.to_exception }
 
-
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
 

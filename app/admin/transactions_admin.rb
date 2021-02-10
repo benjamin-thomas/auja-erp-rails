@@ -5,6 +5,11 @@ Trestle.resource(:transactions) do
     end
   end
 
+  scopes do
+    scope :all, default: true, label: t('admin.scopes.all')
+    scope :unbalanced, label: t('admin.scopes.unbalanced')
+  end
+
   form do
     date_field :cleared_on
     number_field :amount, step: 0.01
