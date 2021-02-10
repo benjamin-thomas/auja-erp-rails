@@ -17,7 +17,7 @@ services:
       - db
 
   db:
-    image: postgres:11.9
+    image: postgres:13.1
     restart: always
     env_file:
       - ~/.env/auja-rails/db.env
@@ -25,6 +25,8 @@ services:
       - "127.1.10.2:5432:5432" # pg-rails-erp.auja.test
     volumes:
       - db-data:/var/lib/postgresql/data
+      - ./tmp/latest.dump:/tmp/latest.dump
+
 
 volumes:
   db-data:

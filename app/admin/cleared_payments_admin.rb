@@ -20,8 +20,7 @@ Trestle.resource(:cleared_payments) do
                .where(id: payment_id)
                .map { |p| [p.display_for_select, p.id] }
 
-    select :payment_id, pm_rel, disabled: true
-    hidden_field :payment_id, value: payment_id
+    select :payment_id, pm_rel, readonly: 'readonly'
     select :transaction_id, tx_rel
   end
 end

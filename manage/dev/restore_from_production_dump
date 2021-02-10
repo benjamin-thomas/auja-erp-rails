@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker-compose run --rm web /bin/bash -c '
+export PGUSER=postgres PGPASSWORD=$POSTGRES_PASSWORD PGHOST=db
+
+psql -d postgres --echo-all --command \
+"SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '\''auja_erp_development'\'' AND pid <> pg_backend_pid();"
+
+pg_restore --verbose --clean --no-acl --no-owner \
+ --exit-on-error --single-transaction --dbname=auja_erp_development ./tmp/latest.dump
+'

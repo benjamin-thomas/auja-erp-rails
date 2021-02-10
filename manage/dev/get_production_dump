@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+heroku pg:backups:capture
+heroku pg:backups:download
+
+mv -v latest.dump ./tmp/
